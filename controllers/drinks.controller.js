@@ -2,7 +2,7 @@ const Drink = require("../models/Drinks.model");
 module.exports.drinksController = {
   getDrinks: (req, res) => {
     //! вывод всех напитоков
-    Drink.find({name: req.body.name, price: req.body.price})
+    Drink.find({}, { _id: 1, name: 1, price: 1})
       .then((drinks) => res.json(drinks))
       .catch(() => res.json("Ошибка при добавлении нового напитка"));
   },
@@ -25,7 +25,7 @@ module.exports.drinksController = {
       .then((drinks) => res.json(drinks))
       .catch(() => res.json("Ошибка при добавлении нового напитка"));
   },
-  getDrinksById: (req, res) => {
+  getDrinksById: async (req, res) => {
     //! информация о напитке
     Drink.findById(req.params.id)
       .then((drinks) => res.json(drinks))
